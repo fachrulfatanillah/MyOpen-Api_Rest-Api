@@ -28,6 +28,7 @@ class Users extends Model
         'google_id',
         'name',
         'email',
+        'email_verified',
         'image_url',
         'status',
         'level',

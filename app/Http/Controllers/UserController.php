@@ -73,10 +73,11 @@ class UserController extends Controller
     {
         try {
             $validated = $request->validate([
-                'google_id' => 'required|string|max:100',
-                'name'      => 'required|string|max:100',
-                'email'     => 'required|email|max:100',
-                'image_url' => 'nullable|url',
+                'google_id'       => 'required|string|max:100',
+                'name'            => 'required|string|max:100',
+                'email'           => 'required|email|max:100',
+                'image_url'       => 'nullable|url',
+                'email_verified'  => 'required|boolean',
             ]);
 
             $user = Users::where('google_id', $validated['google_id'])
@@ -85,15 +86,16 @@ class UserController extends Controller
 
             if (!$user) {
                 $user = Users::create([
-                    'unicode'    => (string) Str::uuid(),
-                    'google_id'  => $validated['google_id'],
-                    'name'       => $validated['name'],
-                    'email'      => $validated['email'],
-                    'image_url'  => $validated['image_url'] ?? null,
-                    'status'     => 1,
-                    'level'      => 0,
-                    'created'    => now(),
-                    'updated'    => now(),
+                    'unicode'         => (string) Str::uuid(),
+                    'google_id'       => $validated['google_id'],
+                    'name'            => $validated['name'],
+                    'email'           => $validated['email'],
+                    'image_url'       => $validated['image_url'] ?? null,
+                    'email_verified'  => $validated['email_verified'],
+                    'status'          => 1,
+                    'level'           => 0,
+                    'created'         => now(),
+                    'updated'         => now(),
                 ]);
             }
 
