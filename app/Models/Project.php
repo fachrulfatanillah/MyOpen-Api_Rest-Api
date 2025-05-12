@@ -17,6 +17,7 @@ class Project extends Model
     protected $fillable = [
         'unicode',
         'project_name',
+        'is_active',
         'status',
         'created',
         'updated',

@@ -11,10 +11,10 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->uuid('unicode')->unique();
             $table->string('project_name', 100);
+            $table->tinyInteger('is_active')->default(1);
             $table->tinyInteger('status');
             $table->timestamp('created')->useCurrent();
             $table->timestamp('updated')->useCurrent()->useCurrentOnUpdate();
-
             $table->uuid('user_id');
             $table->foreign('user_id')->references('unicode')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
