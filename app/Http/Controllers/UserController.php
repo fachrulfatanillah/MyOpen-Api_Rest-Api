@@ -28,7 +28,7 @@ class UserController extends Controller
                 'status'  => 200
             ], 200);
         } catch (\Exception $e) {
-            Log::error('Error fetching user list: ' . $e->getMessage());
+            Log::error('Error fetching list: ' . $e->getMessage());
 
             return response()->json([
                 'success' => false,
@@ -60,7 +60,7 @@ class UserController extends Controller
                 'status'  => 200
             ], 200);
         } catch (\Exception $e) {
-            Log::error('Error fetching user: ' . $e->getMessage());
+            Log::error('Error fetching data: ' . $e->getMessage());
 
             return response()->json([
                 'success' => false,
@@ -110,13 +110,13 @@ class UserController extends Controller
                 ]
             ], 200);
         } catch (QueryException $e) {
-            Log::error('QueryException on user store: ' . $e->getMessage());
+            Log::error('QueryException on user : ' . $e->getMessage());
             return response()->json([
                 'success' => false,
                 'status'  => 500,
             ], 500);
         } catch (\Exception $e) {
-            Log::error('Exception on user store: ' . $e->getMessage());
+            Log::error('Exception on user : ' . $e->getMessage());
             return response()->json([
                 'success' => false,
                 'status'  => 500,

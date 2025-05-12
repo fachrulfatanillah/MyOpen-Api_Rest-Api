@@ -22,6 +22,6 @@ class UserStatusLog extends Model
     // Relasi ke User
     public function user()
     {
-        return $this->belongsTo(Users::class, 'user_id');
+        return $this->belongsTo(Users::class, 'user_id', 'unicode');
     }
 }

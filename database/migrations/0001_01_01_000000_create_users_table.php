@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigInteger('id')->autoIncrement()->primary();
-            $table->uuid('unicode');
+            $table->uuid('unicode')->unique();
             $table->string('google_id', 100)->unique()->nullable();
             $table->string('name', 100);
             $table->string('email', 100)->unique();
@@ -29,16 +29,16 @@ return new class extends Migration
             $table->bigInteger('id')->autoIncrement()->primary();
             $table->tinyInteger('level');
             $table->timestamp('created')->nullable();
-            $table->bigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->uuid('user_id');
+            $table->foreign('user_id')->references('unicode')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
 
         Schema::create('users_status_log', function (Blueprint $table) {
             $table->bigInteger('id')->autoIncrement()->primary();
             $table->tinyInteger('status');
             $table->timestamp('created')->nullable();
-            $table->bigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->uuid('user_id');
+            $table->foreign('user_id')->references('unicode')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
