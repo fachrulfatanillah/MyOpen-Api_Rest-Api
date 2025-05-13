@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('projects', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id')->autoIncrement()->primary();
             $table->uuid('unicode')->unique();
             $table->string('project_name', 100);
             $table->tinyInteger('is_active')->default(1);
