@@ -4,6 +4,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectIsActiveLogController;
 use App\Http\Controllers\ProjectNameLogController;
 use App\Http\Controllers\ProjectStatusLogController;
+use App\Http\Controllers\TablesOfProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -35,3 +36,8 @@ Route::apiResource('project-name-logs', ProjectNameLogController::class)->only([
 Route::apiResource('project-is-active-logs', ProjectIsActiveLogController::class)->only(['index', 'store']);
 
 Route::apiResource('project-status-logs', ProjectStatusLogController::class)->only(['index', 'store']);
+
+// Tables Of Project
+Route::apiResource('tables-of-projects', TablesOfProjectController::class)->parameters([
+    'tables-of-projects' => 'unicode'
+]);
