@@ -9,17 +9,14 @@ use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
 {
-    public function index($user_id)
+    public function index()
     {
         try {
-            $projects = Project::where('user_id', $user_id)
-                ->select('project_name', 'is_active', 'created', 'updated')
-                ->get();
-
+            $projects = Project::all();
             return response()->json([
-                'data'    => $projects,
+                'data' => $projects,
                 'success' => true,
-                'status'  => 200
+                'status' => 200,
             ]);
         } catch (\Exception $e) {
             Log::error('Failed to fetch projects: ' . $e->getMessage());
@@ -27,6 +24,33 @@ class ProjectController extends Controller
             return response()->json([
                 'success' => false,
                 'status'  => 500,
+            ], 500);
+        }
+    }
+
+    public function show($unicode)
+    {
+        try {
+            $project = Project::where('unicode', $unicode)
+                ->select('unicode', 'project_name', 'status', 'is_active', 'user_id', 'created', 'updated')
+                ->firstOrFail();
+
+            return response()->json([
+                'data'    => $project,
+                'success' => true,
+                'status'  => 200
+            ]);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'status'  => 404
+            ], 404);
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch project detail: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'status'  => 500
             ], 500);
         }
     }
