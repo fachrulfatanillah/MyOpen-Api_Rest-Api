@@ -44,3 +44,5 @@ Route::apiResource('tables-of-projects', TablesOfProjectController::class)->para
 ]);
 
 Route::apiResource('table-name-logs', TablesOfProjectsNameLogController::class)->only(['index', 'store']);
+
+Route::apiResource('table-status-logs', TablesOfProjectsStatusLogController::class)->only(['index', 'store']);
