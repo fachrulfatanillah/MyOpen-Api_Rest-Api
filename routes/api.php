@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectIsActiveLogController;
+use App\Http\Controllers\ProjectNameLogController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -26,3 +28,7 @@ Route::apiResource('user-status-logs', UserStatusLogController::class)
 Route::apiResource('projects', ProjectController::class)->parameters([
     'projects' => 'unicode'
 ]);
+
+Route::apiResource('project-name-logs', ProjectNameLogController::class)->only(['index', 'store']);
+
+Route::apiResource('project-is-active-logs', ProjectIsActiveLogController::class)->only(['index', 'store']);
