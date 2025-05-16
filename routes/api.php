@@ -6,6 +6,7 @@ use App\Http\Controllers\ProjectNameLogController;
 use App\Http\Controllers\ProjectStatusLogController;
 use App\Http\Controllers\TablesOfProjectController;
 use App\Http\Controllers\TablesOfProjectsNameLogController;
+use App\Http\Controllers\TablesOfProjectsStatusLogController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
