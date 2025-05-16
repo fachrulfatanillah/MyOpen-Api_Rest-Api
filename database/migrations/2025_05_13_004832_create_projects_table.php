@@ -36,6 +36,15 @@ return new class extends Migration {
 
             $table->foreign('project_id')->references('unicode')->on('projects')->onDelete('cascade')->onUpdate('cascade');
         });
+
+        Schema::create('project_status_log', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->tinyInteger('status');
+            $table->timestamp('created')->useCurrent();
+            $table->uuid('project_id');
+
+            $table->foreign('project_id')->references('unicode')->on('projects')->onDelete('cascade')->onUpdate('cascade');
+        });
     }
 
     public function down(): void
@@ -43,5 +52,6 @@ return new class extends Migration {
         Schema::dropIfExists('projects');
         Schema::dropIfExists('project_name_log');
         Schema::dropIfExists('project_is_active_log');
+        Schema::dropIfExists('project_status_log');
     }
 };
