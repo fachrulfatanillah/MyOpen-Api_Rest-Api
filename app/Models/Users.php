@@ -22,6 +22,8 @@ class Users extends Model
         'unicode',
         'google_id',
         'name',
+        'first_name',
+        'last_name',
         'email',
         'email_verified',
         'image_url',

@@ -17,6 +17,8 @@ class UserController extends Controller
                 return [
                     'id'    => $user->unicode,
                     'name'  => $user->name,
+                    'first_name'  => $user->first_name,
+                    'last_name'  => $user->last_name,
                     'email' => $user->email,
                     'image' => $user->image_url,
                 ];
@@ -75,6 +77,8 @@ class UserController extends Controller
             $validated = $request->validate([
                 'google_id'       => 'required|string|max:100',
                 'name'            => 'required|string|max:100',
+                'first_name'      => 'required|string|max:100',
+                'last_name'       => 'required|string|max:100',
                 'email'           => 'required|email|max:100',
                 'image_url'       => 'nullable|url',
                 'email_verified'  => 'required|boolean',
@@ -89,6 +93,8 @@ class UserController extends Controller
                     'unicode'         => (string) Str::uuid(),
                     'google_id'       => $validated['google_id'],
                     'name'            => $validated['name'],
+                    'first_name'      => $validated['first_name'],
+                    'last_name'       => $validated['last_name'],
                     'email'           => $validated['email'],
                     'image_url'       => $validated['image_url'] ?? null,
                     'email_verified'  => $validated['email_verified'],
@@ -103,10 +109,12 @@ class UserController extends Controller
                 'success' => true,
                 'status'  => 200,
                 'data'    => [
-                    'id'    => $user->unicode,
-                    'name'  => $user->name,
-                    'email' => $user->email,
-                    'image' => $user->image_url,
+                    'id'         => $user->unicode,
+                    'name'       => $user->name,
+                    'first_name' => $user->first_name,
+                    'last_name'  => $user->last_name,
+                    'email'      => $user->email,
+                    'image'      => $user->image_url,
                 ]
             ], 200);
         } catch (QueryException $e) {

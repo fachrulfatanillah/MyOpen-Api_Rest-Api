@@ -16,6 +16,8 @@ return new class extends Migration
             $table->uuid('unicode')->unique();
             $table->string('google_id', 100)->unique()->nullable();
             $table->string('name', 100);
+            $table->string('first_name', 100);
+            $table->string('last_name', 100);
             $table->string('email', 100)->unique();
             $table->boolean('email_verified')->default(false);
             $table->string('image_url')->nullable();
