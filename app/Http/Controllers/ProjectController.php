@@ -31,26 +31,28 @@ class ProjectController extends Controller
     public function show($unicode)
     {
         try {
-            $project = Project::where('unicode', $unicode)
+            $user = Users::where('unicode', $unicode)->firstOrFail();
+
+            $projects = Project::where('user_id', $user->unicode)
                 ->select('unicode', 'project_name', 'status', 'is_active', 'user_id', 'created', 'updated')
-                ->firstOrFail();
+                ->get();
 
             return response()->json([
-                'data'    => $project,
+                'data'    => $projects,
                 'success' => true,
                 'status'  => 200
             ]);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response()->json([
                 'success' => false,
-                'status'  => 404
+                'status'  => 404,
             ], 404);
         } catch (\Exception $e) {
-            Log::error('Failed to fetch project detail: ' . $e->getMessage());
+            Log::error('Gagal mengambil data project: ' . $e->getMessage());
 
             return response()->json([
                 'success' => false,
-                'status'  => 500
+                'status'  => 500,
             ], 500);
         }
     }
